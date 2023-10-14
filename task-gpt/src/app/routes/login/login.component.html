@@ -6,7 +6,7 @@
           class="img-fluid" alt="Sample image">
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form >
+        <form (ngSubmit)="onSubmit()">
           <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
             <h1 class="lead fw-normal mb-4 me-3">Bienvenido/a a Task GPT</h1>
 
@@ -39,7 +39,7 @@
           </div>
 
           <div class="text-center text-lg-start mt-4 pt-2">
-            <button type="button" class="w-100 btn btn-primary btn-lg"
+            <button type="submit" class="w-100 btn btn-primary btn-lg"
               style="padding-left: 2.5rem; padding-right: 2.5rem;">Iniciar sesión</button>
             <p class="small fw-bold mt-2 pt-1 mb-0">¿Aún no tienes una cuenta? <a routerLink="/register" routerLinkActive="active" class="link-danger">
                 Regístrate</a></p>

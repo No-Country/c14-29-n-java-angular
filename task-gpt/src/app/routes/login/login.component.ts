@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 // importamos las librerias de formulario que vamos a necesitar
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
-import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-login',
@@ -11,9 +10,10 @@ import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 })
 
 export class LoginComponent implements OnInit {
-  faEye = faEye;
-  faEyeSlash = faEyeSlash;
 
+  onSubmit(){
+    console.log('Boton');
+  }
 
   password = new FormControl('', [
     Validators.required,

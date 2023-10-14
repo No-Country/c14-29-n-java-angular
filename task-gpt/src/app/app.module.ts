@@ -11,6 +11,7 @@ import { LoginComponent } from './routes/login/login.component';
 import { RegisterComponent } from './routes/register/register.component';
 import { Error404Component } from './routes/error404/error404.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
