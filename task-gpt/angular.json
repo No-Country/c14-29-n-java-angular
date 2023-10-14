@@ -14,6 +14,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/task-gpt",
+
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -58,6 +59,7 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+
           "configurations": {
             "production": {
               "browserTarget": "task-gpt:build:production"
