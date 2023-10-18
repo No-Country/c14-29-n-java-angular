@@ -14,6 +14,8 @@ export class RegisterComponent {
     console.log('Boton presionado!');
   }
 
+  
+
   password = new FormControl('', [
     Validators.required,
     Validators.minLength(8),
