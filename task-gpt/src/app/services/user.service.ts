@@ -1,17 +1,16 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class UserService {
+  private usuariosURL = 'assets/users.json'; // Ruta al archivo JSON
+
   constructor(private http: HttpClient) {}
 
-  login(user: any): Observable<any> {
-    return this.http.post("https://reqres.in/api/login", user);
-  }
-  register(user: any): Observable<any> {
-    return this.http.post("https://reqres.in/api/register", user);
+  obtenerUsuarios(): Observable<any[]> {
+    return this.http.get<any[]>(this.usuariosURL);
   }
 }

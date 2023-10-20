@@ -1,0 +1,128 @@
+.header {
+  padding-top: 1.8rem;
+  padding-bottom: 1.8rem;
+}
+.header .nav-link,
+.header .navbar-brand,
+.header .navbar-toggler i {
+  color: blue;
+  transition: color 0.2s linear;
+}
+.header .nav-link:hover,
+.header .navbar-brand:hover,
+.header .navbar-toggler i:hover {
+  color: mediumpurple;
+}
+.header .navbar-brand {
+  font-size: 1.8rem;
+}
+.header .navbar-toggler {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 2rem;
+}
+.header .navbar-toggler i {
+  font-size: 1.5rem;
+}
+.header.headroom {
+  transition: all 0.2s linear;
+}
+.header.headroom--top, .header.headroom--top.headroom--pinned {
+  background-color: transparent;
+}
+.header.headroom--not-top.headroom--pinned {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: rgba(193, 114, 114, 0.9);
+}
+.header.headroom--not-top.headroom--pinned .nav-link,
+.header.headroom--not-top.headroom--pinned .navbar-brand,
+.header.headroom--not-top.headroom--pinned .navbar-toggler i {
+  color: black;
+}
+.header.headroom--pinned {
+  transform: translateY(0%);
+}
+.header.headroom--unpinned {
+  transform: translateY(-100%);
+}
+
+.offcanvas .fa-close {
+  font-size: 1.8rem;
+}
+.offcanvas.show .row {
+  padding-top: 2rem !important;
+}
+.offcanvas.show .nav-link {
+  color: black;
+}
+
+.cover-image {
+  min-height: 600px;
+  color: gray;
+  background: url("https://bit.ly/3Rj3yMN") no-repeat center;
+  background-size: cover;
+}
+.cover-image__title {
+  text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+.cover-image::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: black;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 30%);
+}
+
+@media (max-width: 767px) {
+  p.lead {
+    font-size: 1rem;
+  }
+}
+@media (min-width: 1200px) {
+  [class*=container] {
+    max-width: 1000px;
+  }
+}
+.mouse {
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 47px;
+  border: 2px solid white;
+  border-radius: 14px;
+}
+.mouse .mouse-scroll {
+  top: 10px;
+  left: 11px;
+  width: 4px;
+  height: 4px;
+  border-radius: 2px;
+  -webkit-animation: mouse 1.5s ease-out infinite;
+          animation: mouse 1.5s ease-out infinite;
+}
+
+@-webkit-keyframes mouse {
+  0% {
+    top: 4px;
+    opacity: 0;
+    height: 4px;
+  }
+  50% {
+    top: 8px;
+    opacity: 1;
+    height: 10px;
+  }
+  to {
+    top: 12px;
+    opacity: 0;
+    height: 4px;
+  }
+}
