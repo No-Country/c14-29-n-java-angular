@@ -14,6 +14,7 @@ import { Error404Component } from './routes/error404/error404.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
+import { ComponentNameComponent } from './component-name/component-name.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { TaskListComponent } from './components/task-list/task-list.component';
     Error404Component,
     NavbarComponent,
     HeaderComponent,
-    TaskListComponent
+    TaskListComponent,
+    ComponentNameComponent
   ],
   imports: [
     BrowserModule,
