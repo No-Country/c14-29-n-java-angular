@@ -11,6 +11,8 @@ export class TaskListComponent {
   faPlus: any = faPlus;
   faTrash: any = faTrash;
 
+  fechaHoy = Date.now();
+
   tareas: string[] = [];
   nuevaTarea: string = '';
 
