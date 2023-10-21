@@ -17,29 +17,33 @@
   background-image: linear-gradient(to left, #BDBBBE 0%, #9D9EA3 100%), radial-gradient(88% 271%, rgba(255, 255, 255, 0.25) 0%, rgba(254, 254, 254, 0.25) 1%, rgba(0, 0, 0, 0.25) 100%), radial-gradient(50% 100%, rgba(255, 255, 255, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%);
  background-blend-mode: normal, lighten, soft-light;
 }
+.mi-fuente-personalizada {
+    font-family: 'roboto', sans-serif;
+}
 
 </style>
 
 <div class="bg-dark min-height-divHome">
-  <div class="container mt-3">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="p-3">
-          <h2 class="text-white">To do List</h2>
+  <div class="container">
+    <div class="row ">
+      <div class="col-md-4 ">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+            class="img-fluid" alt="Sample image">
         </div>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-8 mt-4 font">
         <div class="d-flex flex-column justify-content-center align-items-center p-3">
           <div class="mb-3 w-100 d-flex justify-content-between align-items-center"> <!-- Esto separará el formulario y la lista -->
-            <input [(ngModel)]="nuevaTarea" (keyup.enter)="agregarTarea()" placeholder="New To do" class="w-75 mr-2">
+            <input [(ngModel)]="nuevaTarea" (keyup.enter)="agregarTarea()" placeholder="New To do..." class="w-50 mr-2">
             <button type="button" class="btn btn-light" (click)="agregarTarea()">Add
             </button>
           </div>
           
         </div>
       </div>
-      <div class="d-flex flex-column min-height-element align-items-center justify-content-center  m-4 ">
-        <div *ngFor="let tarea of tareas; let i = index" class="mb-3 mt-3 border border-dark bg-white d-flex custom-bg justify-content-between align-items-center w-100 h-100">
+      <div class="d-flex flex-column min-height-element align-items-center justify-content-center m-4">
+        <div *ngFor="let tarea of tareas; let i = index" class="mb-3 mt-3 border border-dark bg-white d-flex custom-bg justify-content-between align-items-center w-75 h-100">
           <p class="m-4 word-wrap text-white">{{ tarea }}</p>
           <button type="button" class="btn btn btn-light m-4" (click)="eliminarTarea(i)">Delete</button>
         </div>
