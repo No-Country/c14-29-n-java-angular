@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-task-list',
@@ -6,6 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent {
+
+  faPlus: any = faPlus;
+  faTrash: any = faTrash;
 
   tareas: string[] = [];
   nuevaTarea: string = '';
