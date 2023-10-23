@@ -35,7 +35,8 @@
       <div class="col-md-8 mt-4 font">
         <div class="d-flex flex-column justify-content-center align-items-center p-3">
           <div class="mb-3 w-100 d-flex justify-content-between align-items-center"> <!-- Esto separará el formulario y la lista -->
-            <input [(ngModel)]="nuevaTarea" (keyup.enter)="agregarTarea()" placeholder="New To do..." class="w-50 mr-2">
+            <!-- El atributo (keyup.enter) detecta cuando el usuario presiona Enter, mientras que (input) detecta cambios en el contenido del campo de entrada de texto -->
+            <input [(ngModel)]="nuevaTarea" (input)="obtenerSugerencias()" (keyup.enter)="agregarTarea()" placeholder="New To do..." class="w-50 mr-2">
             <button type="button" class="btn btn-light" (click)="agregarTarea()">Add
               <fa-icon [icon]="faPlus"></fa-icon>
             </button>
@@ -43,9 +44,20 @@
 
         </div>
       </div>
+
+      <div *ngIf="sugerencias.length > 0">
+        <h2>Sugerencias:</h2>
+        <ul>
+          <li *ngFor="let sugerencia of sugerencias">
+            <a (click)="completarTarea(sugerencia)">{{ sugerencia }}</a>
+          </li>
+        </ul>
+      </div>
+
       <div class="d-flex flex-column min-height-element align-items-center justify-content-center m-4">
         <div *ngFor="let tarea of tareas; let i = index" class="mb-3 mt-3 border border-dark bg-white d-flex custom-bg justify-content-between align-items-center w-75 h-100">
           <p class="m-4 word-wrap text-white">{{ tarea }} Creado el: {{fechaHoy | date:"fullDate"}} a las {{fechaHoy | date:"shortTime"}} hs
+
           </p>
             <button type="button" class="btn btn-light m-4" (click)="eliminarTarea(i)">Delete
             <fa-icon [icon]="faTrash"></fa-icon>
