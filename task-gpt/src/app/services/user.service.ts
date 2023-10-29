@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private usuariosURL = 'assets/users.json'; // Ruta al archivo JSON
 
-  constructor(private http: HttpClient) {}
+  constructor(private auth: Auth) { }
 
-  obtenerUsuarios(): Observable<any[]> {
-    return this.http.get<any[]>(this.usuariosURL);
+  register({ email, password }: any) {
+    return createUserWithEmailAndPassword(this.auth, email, password);
+  }
+
+  login({ email, password }: any) {
+    return signInWithEmailAndPassword(this.auth, email, password);
+  }
+
+
+  logout() {
+    return signOut(this.auth);
   }
 }
