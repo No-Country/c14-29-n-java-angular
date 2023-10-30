@@ -7,6 +7,7 @@ import localeEs from "@angular/common/locales/es";
 import { registerLocaleData } from "@angular/common";
 registerLocaleData(localeEs, "es");
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +24,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { SigninComponent } from './routes/signin/signin.component';
 import { SignupComponent } from './routes/signup/signup.component';
+import { ButtonDropdownComponent } from './components/button-dropdown/button-dropdown.component';
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import { SignupComponent } from './routes/signup/signup.component';
     ComponentNameComponent,
     LogoutComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    ButtonDropdownComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,7 @@ import { SignupComponent } from './routes/signup/signup.component';
     FontAwesomeModule,
     BrowserAnimationsModule,
     ModalModule.forRoot(),
+    BsDropdownModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth())
   ],
