@@ -1,0 +1,103 @@
+
+<style>
+  .word-wrap {
+    overflow: hidden;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
+  .min-height-element {
+  min-height: 0px; /* Establece el ancho mínimo deseado */
+
+}
+.min-height-divHome {
+  min-height: 100vh; /* Establece el ancho mínimo deseado */
+
+}
+.custom-bg {
+  background-image: linear-gradient(to left, #BDBBBE 0%, #9D9EA3 100%), radial-gradient(88% 271%, rgba(255, 255, 255, 0.25) 0%, rgba(254, 254, 254, 0.25) 1%, rgba(0, 0, 0, 0.25) 100%), radial-gradient(50% 100%, rgba(255, 255, 255, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%);
+ background-blend-mode: normal, lighten, soft-light;
+}
+.mi-fuente-personalizada {
+    font-family: 'roboto', sans-serif;
+}
+
+/*Esto acomoda la lista de sugerencias abajo del Input*/
+
+ul.suggestions {
+  max-height: 150px;
+  overflow-y: auto;
+  list-style: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+}
+
+
+
+</style>
+
+<div class="bg-light min-height-divHome">
+  <div class="container">
+    <div class="row ">
+      <div class="col-md-4 ">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+            class="img-fluid" alt="Sample image">
+        </div>
+      </div>
+      <div class="col-md-8 mt-4 font">
+        <div class="d-flex flex-column justify-content-center align-items-center p-3">
+          <div class="mb-3 w-100 d-flex justify-content-between align-items-center"> <!-- Esto separará el formulario y la lista -->
+            <div class="d-flex flex-column w-100 mr-2" style="min-height: 100px;">
+            <!-- El atributo (keyup.enter) detecta cuando el usuario presiona Enter, mientras que (input) detecta cambios en el contenido del campo de entrada de texto -->
+            <!--Esto iria en el input (input)="obtenerSugerencias()" -->
+            <input [(ngModel)]="nuevaTarea" (input)="onTareaInput($event)"
+            (keyup.enter)="agregarTarea()"
+             placeholder="New To do..." class="w-50 mr-2">
+             <!-- <div *ngIf="sugerencias.length > 0">-->
+          <div class="w-50">
+            <ul class="list-group suggestions" >
+              <li class="list-group-item list-group-item-action" *ngFor="let suggestion of suggestions"
+                (click)="selectSuggestion(suggestion)">{{ suggestion }}
+              </li>
+            </ul>
+          </div>
+   <!--</div>-->
+            </div>
+            <button type="button" class="btn btn-outline-dark" id="boton" (click)="agregarTarea()" style="min-height: 100px;" style="position: absolute;">Add
+              <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
+
+
+
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+      <div class="d-flex flex-column min-height-element align-items-center justify-content-center m-4">
+        <div *ngFor="let tarea of tareas; let i = index" class="mb-3 mt-3 border border-dark bg-white d-flex custom-bg justify-content-between align-items-center w-75 h-100">
+
+          <div class="m-4 word-wrap text-white">
+            <input class="form-check-input" type="checkbox">
+            <span > {{ tarea }} </span> <br>
+            <span>Creado el: {{fechaHoy | date:"fullDate"}} a las {{fechaHoy | date:"shortTime"}} hs
+
+            </span>
+          </div>
+            <button type="button" class="btn btn-outline-danger m-4" (click)="eliminarTarea(i)">
+            <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
