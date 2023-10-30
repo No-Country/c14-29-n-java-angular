@@ -83,7 +83,7 @@ export class TaskListComponent {
   // this.chatGptService.getTaskSuggestions(this.palabraClave).subscribe((sugerencias: string[]) => {
   //  this.sugerencias = sugerencias;
    // }
-  //  );
+  // );
  // }
 //}
 
