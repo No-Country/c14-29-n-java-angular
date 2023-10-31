@@ -33,8 +33,10 @@ ul.suggestions {
   background-color: #fff;
 }
 
-
-
+.completed {
+  background-image: linear-gradient(to left, #0D6EFD 0%, #1861ce 100%); /* Cambia el color a verde */
+  background-blend-mode: normal, lighten, soft-light;
+}
 </style>
 
 <div class="bg-light min-height-divHome">
@@ -83,20 +85,28 @@ ul.suggestions {
 
 
       <div class="d-flex flex-column min-height-element align-items-center justify-content-center m-4">
-        <div *ngFor="let tarea of tareas; let i = index" class="mb-3 mt-3 border border-dark bg-white d-flex custom-bg justify-content-between align-items-center w-75 h-100">
 
-          <div class="m-4 word-wrap text-white">
-            <input class="form-check-input" type="checkbox">
-            <span > {{ tarea }} </span> <br>
-            <span>Creado el: {{fechaHoy | date:"fullDate"}} a las {{fechaHoy | date:"shortTime"}} hs
+<div *ngFor="let tarea of tareas; let i = index" class="mb-3 mt-3 border border-dark d-flex custom-bg justify-content-between align-items-center w-75 h-100" [class.completed]="tarea.completada">
+  <div class="m-4 word-wrap text-white" >
+    <input class="form-check-input" type="checkbox" (click)="marcarComoCompletada(i)">
+    <span> {{ tarea.nombre }} </span> <br>
+    <span>Creado el: {{ fechaHoy | date:"fullDate" }} a las {{ fechaHoy | date:"shortTime" }} hs</span>
+  </div>
+  <button type="button" class="btn btn-outline-danger m-4" (click)="eliminarTarea(i)">
+    <fa-icon [icon]="faTrash"></fa-icon>
+  </button>
+</div>
 
-            </span>
-          </div>
-            <button type="button" class="btn btn-outline-danger m-4" (click)="eliminarTarea(i)">
-            <fa-icon [icon]="faTrash"></fa-icon>
-            </button>
-        </div>
-      </div>
+
+
+
+
+
+
+
+
+
+
 
     </div>
   </div>

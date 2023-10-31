@@ -65,7 +65,7 @@ export class TaskListComponent {
 
   fechaHoy = Date.now();
 
-  tareas: string[] = [];
+  tareas: { nombre: string, completada: boolean }[] = [];
   nuevaTarea: string = '';
 
   sugerencias: string[] = [];
@@ -87,15 +87,13 @@ export class TaskListComponent {
  // }
 //}
 
-  agregarTarea() {
-    if (this.nuevaTarea.trim() !== '') {
-      this.tareas.push(this.nuevaTarea);
-      console.log('boton');
-      this.nuevaTarea = '';
-      // Restablecer las sugerencias después de agregar una tarea
-      this.sugerencias = [];
-    }
+agregarTarea() {
+  if (this.nuevaTarea.trim() !== '') {
+    this.tareas.push({ nombre: this.nuevaTarea, completada: false }); // Inicializa completada como false
+    this.nuevaTarea = '';
+    this.sugerencias = [];
   }
+}
 
   // la funcion completarTarea(sugerencia) es para que el usuario seleccione una sugerencia para completar la tarea.
 //  completarTarea(sugerencia: string) {
@@ -106,6 +104,11 @@ export class TaskListComponent {
 
   eliminarTarea(index: number) {
     this.tareas.splice(index, 1);
+
+  }
+
+  marcarComoCompletada(index: number) {
+    this.tareas[index].completada = !this.tareas[index].completada;
   }
 }
 
