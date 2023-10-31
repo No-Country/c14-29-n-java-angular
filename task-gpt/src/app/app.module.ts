@@ -25,6 +25,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { SigninComponent } from './routes/signin/signin.component';
 import { SignupComponent } from './routes/signup/signup.component';
 import { ButtonDropdownComponent } from './components/button-dropdown/button-dropdown.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -42,7 +43,7 @@ import { ButtonDropdownComponent } from './components/button-dropdown/button-dro
     SignupComponent,
     ButtonDropdownComponent
   ],
-  imports: [
+  imports: [DragDropModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
@@ -59,3 +60,6 @@ import { ButtonDropdownComponent } from './components/button-dropdown/button-dro
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export class TuComponente {
+  miImagenUrl = 'assets/lapiz.png';
+}

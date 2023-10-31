@@ -3,6 +3,7 @@ import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
 import * as OpenAI from 'openai';
 import { ChatGptService } from 'src/app/services/chat-gpt.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-task-list',
@@ -154,6 +155,10 @@ agregarTarea() {
     }
   
     return { 'background-color': backgroundColor };
+  }
+
+  onTareasDrop(event: CdkDragDrop<string[]>): void {
+    moveItemInArray(this.tareasFiltradas, event.previousIndex, event.currentIndex);
   }
 }
 
