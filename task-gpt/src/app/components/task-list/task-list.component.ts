@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
+<<<<<<< HEAD
+=======
+import * as OpenAI from 'openai';
+import { ChatGptService } from 'src/app/services/chat-gpt.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+>>>>>>> 11a10fe98c1d2d8a17665b41966d64b8278c5ae7
 
 @Component({
   selector: 'app-task-list',
@@ -42,7 +48,7 @@ export class TaskListComponent {
       onTareaInput(event: any) {
           const tareaTerm = event.target.value.toLowerCase().trim();
           if (tareaTerm === '') {
-                  this.suggestions = []; // Si el campo de búsqueda está vacío, borra las sugerencias.
+                  this.suggestions = [];
                         return;
 
           }
@@ -56,39 +62,25 @@ export class TaskListComponent {
                                 );
                                   }
      selectSuggestion(suggestion: string) {
-           this.nuevaTarea = suggestion; // Autocompletar el campo de entrada con la sugerencia seleccionada
-               this.suggestions = []; // Borrar las sugerencias después de seleccionar una
+           this.nuevaTarea = suggestion; 
+               this.suggestions = []; 
                  }
   faPlus: any = faPlus;
   faTrash: any = faTrash;
 
   fechaHoy = Date.now();
 
-  tareas: { nombre: string, completada: boolean, prioridad: string, editandoPrioridad: boolean, prioridadTemporal: string }[] = [];
+  tareas: { nombre: string, completada: boolean, prioridad: string, editandoPrioridad: boolean, prioridadTemporal: string, checkVisible: boolean }[] = [];
 
   nuevaTarea: string = '';
-  nuevaPrioridad: string = ''; // Nueva propiedad para almacenar la prioridad seleccionada
+  nuevaPrioridad: string = ''; 
   prioridades: string[] = ['Low', 'Medium', 'High'];
 
   sugerencias: string[] = [];
   palabraClave: string = '';
-  filtroPrioridad: string = 'All'; // Valor predeterminado para mostrar todas las tareas
+  filtroPrioridad: string = 'All'; 
 
- // constructor(private chatGptService: ChatGptService){ }
 
- // La función obtenerSugerencias() se encarga de obtener las sugerencias utilizando el servicio chatGptService.
- // obtenerSugerencias() {
-   // if (this.nuevaTarea.trim() === '') {
-      // Si el cuadro de texto está vacío, no solicitar sugerencias y establecer this.sugerencias como un arreglo vacío
-     // this.sugerencias = [];
-   // } else {
-      // Si el cuadro de texto contiene una palabra clave, obtener sugerencias
-  // this.chatGptService.getTaskSuggestions(this.palabraClave).subscribe((sugerencias: string[]) => {
-  //  this.sugerencias = sugerencias;
-   // }
-  // );
- // }
-//}
 
 agregarTarea() {
   if (this.nuevaTarea.trim() === '') {
@@ -105,17 +97,21 @@ agregarTarea() {
     });
   } else {
     const prioridad = this.nuevaPrioridad;
-    this.tareas.push({ nombre: this.nuevaTarea, completada: false, prioridad, editandoPrioridad: false, prioridadTemporal: '' });
+    this.tareas.push({
+      nombre: this.nuevaTarea,
+      completada: false,
+      prioridad,
+      editandoPrioridad: false,
+      prioridadTemporal: '',
+      checkVisible: true 
+    });
     this.nuevaTarea = '';
     this.nuevaPrioridad = '';
     this.sugerencias = [];
   }
 }
-  // la funcion completarTarea(sugerencia) es para que el usuario seleccione una sugerencia para completar la tarea.
-//  completarTarea(sugerencia: string) {
-  //  this.nuevaTarea = sugerencia; // Completa el campo de entrada con la sugerencia
-  //  this.sugerencias = []; // Borra las sugerencias, ya que se ha seleccionado una
-  //}
+
+
 
 
   eliminarTarea(index: number) {
@@ -133,7 +129,7 @@ agregarTarea() {
   }
 
   guardarPrioridad(index: number) {
-    // Puedes agregar validaciones aquí si es necesario
+
     this.tareas[index].prioridad = this.tareas[index].prioridadTemporal;
     this.tareas[index].editandoPrioridad = false;
   }
@@ -144,7 +140,29 @@ agregarTarea() {
       return this.tareas.filter((tarea) => tarea.prioridad === this.filtroPrioridad);
     }
   }
+  getCardBackground(prioridad: string): any {
+    let backgroundColor = '';
+  
+    switch (prioridad) {
+      case 'Low':
+        backgroundColor = '#007ACC'; 
+        break;
+      case 'Medium':
+        backgroundColor = '#dabb0f'; 
+        break;
+      case 'High':
+        backgroundColor = '#FF4500'; 
+        break;
+      default:
+        backgroundColor = 'transparent'; 
+    }
+  
+    return { 'background-color': backgroundColor };
+  }
 
+  onTareasDrop(event: CdkDragDrop<string[]>): void {
+    moveItemInArray(this.tareasFiltradas, event.previousIndex, event.currentIndex);
+  }
 }
 
 
