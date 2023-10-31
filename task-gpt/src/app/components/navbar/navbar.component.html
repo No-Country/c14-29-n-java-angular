@@ -4,7 +4,7 @@
 }
 </style>
 
-<!--<header data-headroom class="header fixed-top">-->
+
   <nav class="navbar navbar-expand-lg text-uppercase py-0 text-white bg-primary">
     <a class="navbar-brand d-lg-none py-0 ms-4 me-0" href="#">
      <span class="text-white ">Task GPT</span>
@@ -13,9 +13,11 @@
       <div class="container-lg">
         <div class="row flex-grow-1 p-1 p-lg-0">
           <div class="d-flex d-lg-block col-lg-4 order-1 order-lg-2 text-lg-center">
-            <button type="button" class="d-lg-none border-0 bg-transparent p-0 ms-auto" data-bs-dismiss="offcanvas" aria-label="Cerrar">
-              <i class="fa-solid fa-close"></i>
-            </button>
+            <div class="offcanvas-header ">
+              <h6 class="offcanvas-title" id="offcanvasNavbarLabel">{{ userEmail }}</h6>
+
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
             <a class="navbar-brand mt-3 d-none fw-bold d-lg-block py-0 me-0 text-white mi-fuente-personalizada" href="/home">
               Task <span class="fw-bold text-white mi-fuente-personalizada">GPT</span>
             </a>
@@ -37,17 +39,18 @@
               </li> -->
               <li class="nav-item">
                 <app-button-dropdown class="nav-link"></app-button-dropdown>
-                
+
               </li>
             </ul>
           </div>
         </div>
       </div>
     </div>
+      <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg">
+        <span class="navbar-toggler-icon"></span>
+      </button>
   </nav>
-  <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg">
-    <i class="fa-solid fa-bars"></i>
-  </button>
-<!--</header>-->
+
+
 
 
