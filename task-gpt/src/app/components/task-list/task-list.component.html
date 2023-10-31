@@ -34,8 +34,11 @@ ul.suggestions {
 }
 
 .completed {
-  background-image: linear-gradient(to left, #0D6EFD 0%, #1861ce 100%); /* Cambia el color a verde */
+  background-image: linear-gradient(to left, #0D6EFD 0%, #1d5fc2 100%); /* Cambia el color a verde */
   background-blend-mode: normal, lighten, soft-light;
+}
+.text-underline {
+  text-decoration: underline;
 }
 </style>
 
@@ -44,73 +47,65 @@ ul.suggestions {
     <div class="row ">
       <div class="col-md-4 ">
         <div class="col-md-9 col-lg-6 col-xl-5">
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-            class="img-fluid" alt="Sample image">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid" alt="Sample image">
         </div>
       </div>
-      <div class="col-md-8 mt-4 font">
+      <div class="col-md-8 mt-2 font">
         <div class="d-flex flex-column justify-content-end align-items-end p-3">
-          <button type="button" class="btn btn-outline-dark  " id="boton" (click)="agregarTarea()">Add
+          <button type="button" class="btn btn-outline-dark" (click)="agregarTarea()">Add
             <fa-icon [icon]="faPlus"></fa-icon>
           </button>
-          <div class="mt-0 w-100 d-flex justify-content-start align-items-start"> <!-- Esto separará el formulario y la lista -->
-      
-  
-            <div class="d-flex flex-column w-50  " style="min-height: 100px;">
-            <!-- El atributo (keyup.enter) detecta cuando el usuario presiona Enter, mientras que (input) detecta cambios en el contenido del campo de entrada de texto -->
-            <!--Esto iria en el input (input)="obtenerSugerencias()" -->
-            <input [(ngModel)]="nuevaTarea" (input)="onTareaInput($event)"
-            (keyup.enter)="agregarTarea()"
-             placeholder="New To do..." class="w-100">
-             <div class="w-100 d-flex justify-content-center align-items-center">
-              <ul class="list-group suggestions" style="text-align: center;">
-                <li class="list-group-item list-group-item-action" *ngFor="let suggestion of suggestions" (click)="selectSuggestion(suggestion)">{{ suggestion }}</li>
-              </ul>
+          <div class="mt-0 w-100 d-flex justify-content-start align-items-start">
+            <div class="d-flex flex-column w-50">
+              <input [(ngModel)]="nuevaTarea" (input)="onTareaInput($event)" (keyup.enter)="agregarTarea()" placeholder="New To do..." class="w-100">
+              <div class="w-100 d-flex justify-content-center align-items-center">
+                <ul class="list-group suggestions" style="text-align: center;">
+                  <li class="list-group-item list-group-item-action" *ngFor="let suggestion of suggestions" (click)="selectSuggestion(suggestion)">{{ suggestion }}</li>
+                </ul>
+              </div>
             </div>
-            
+            <div class="d-flex flex-row px-4 ml-2">
+              <span class="font">Priority:</span>
+              <select [(ngModel)]="nuevaPrioridad" class="w-0">
+                <option value="" disabled selected>Select Priority</option>
+                <option *ngFor="let prioridad of prioridades" [value]="prioridad">{{ prioridad }}</option>
+              </select>
             </div>
-       
-  
           </div>
-             <!-- <div *ngIf="sugerencias.length > 0">-->
-           
-              
-   <!--</div>-->
-   
-
         </div>
       </div>
-
-
-
-
+      
+  
       <div class="d-flex flex-column min-height-element align-items-center justify-content-center m-4">
-
-<div *ngFor="let tarea of tareas; let i = index" class="mb-3 mt-3 border border-dark d-flex custom-bg justify-content-between align-items-center w-75 h-100" [class.completed]="tarea.completada">
-  <div class="m-4 word-wrap text-white" >
-    <input class="form-check-input" type="checkbox" (click)="marcarComoCompletada(i)">
-    <span> {{ tarea.nombre }} </span> <br>
-    <span>Creado el: {{ fechaHoy | date:"fullDate" }} a las {{ fechaHoy | date:"shortTime" }} hs</span>
-  </div>
-  <button type="button" class="btn btn-outline-danger m-4" (click)="eliminarTarea(i)">
-    <fa-icon [icon]="faTrash"></fa-icon>
-  </button>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
+        <div *ngFor="let tarea of tareas; let i = index" class="mb-3 mt-3 border border-dark d-flex custom-bg justify-content-between align-items-center w-75 h-100" [class.completed]="tarea.completada">
+          <div class="m-4 word-wrap text-white">
+            <input class="form-check-input" type="checkbox" (click)="marcarComoCompletada(i)">
+            <span class="px-2">{{ tarea.nombre }}</span> <br>
+            <span class="fw-bolder text-light text-underline">Priority:</span>
+              <span class="fw-medium px-2" *ngIf="!tarea.editandoPrioridad">{{ tarea.prioridad }}</span>
+              <span *ngIf="tarea.editandoPrioridad">
+                <select [(ngModel)]="tarea.prioridadTemporal">
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
+                <button class="btn btn-success btn-sm" (click)="guardarPrioridad(i)">Save</button>
+              </span>
+            
+            <br>
+            
+            <span class="text-light fw-bolder py-2 text-underline">Create: </span><span class="font-monospace fw-bolder px-2 ">{{ fechaHoy | date:"fullDate" }},{{ fechaHoy | date:"shortTime" }} hs</span>
+          </div>
+          <div class="d-flex flex-column">
+            <button type="button" class="btn btn-dark m-4" (click)="editarPrioridad(i)">Edit Priority</button>
+            <button type="button" class="btn btn-danger m-4" (click)="eliminarTarea(i)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
 </div>
 
 
