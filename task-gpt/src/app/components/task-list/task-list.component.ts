@@ -44,7 +44,7 @@ export class TaskListComponent {
       onTareaInput(event: any) {
           const tareaTerm = event.target.value.toLowerCase().trim();
           if (tareaTerm === '') {
-                  this.suggestions = []; // Si el campo de búsqueda está vacío, borra las sugerencias.
+                  this.suggestions = [];
                         return;
 
           }
@@ -58,8 +58,8 @@ export class TaskListComponent {
                                 );
                                   }
      selectSuggestion(suggestion: string) {
-           this.nuevaTarea = suggestion; // Autocompletar el campo de entrada con la sugerencia seleccionada
-               this.suggestions = []; // Borrar las sugerencias después de seleccionar una
+           this.nuevaTarea = suggestion; 
+               this.suggestions = []; 
                  }
   faPlus: any = faPlus;
   faTrash: any = faTrash;
@@ -69,41 +69,27 @@ export class TaskListComponent {
   tareas: { nombre: string, completada: boolean, prioridad: string, editandoPrioridad: boolean, prioridadTemporal: string, checkVisible: boolean }[] = [];
 
   nuevaTarea: string = '';
-  nuevaPrioridad: string = ''; // Nueva propiedad para almacenar la prioridad seleccionada
+  nuevaPrioridad: string = ''; 
   prioridades: string[] = ['Low', 'Medium', 'High'];
 
   sugerencias: string[] = [];
   palabraClave: string = '';
-  filtroPrioridad: string = 'All'; // Valor predeterminado para mostrar todas las tareas
+  filtroPrioridad: string = 'All'; 
 
- // constructor(private chatGptService: ChatGptService){ }
 
- // La función obtenerSugerencias() se encarga de obtener las sugerencias utilizando el servicio chatGptService.
- // obtenerSugerencias() {
-   // if (this.nuevaTarea.trim() === '') {
-      // Si el cuadro de texto está vacío, no solicitar sugerencias y establecer this.sugerencias como un arreglo vacío
-     // this.sugerencias = [];
-   // } else {
-      // Si el cuadro de texto contiene una palabra clave, obtener sugerencias
-  // this.chatGptService.getTaskSuggestions(this.palabraClave).subscribe((sugerencias: string[]) => {
-  //  this.sugerencias = sugerencias;
-   // }
-  // );
- // }
-//}
 
 agregarTarea() {
   if (this.nuevaTarea.trim() === '') {
     Swal.fire({
       icon: 'error',
       title: 'Error',
-      text: 'Debes ingresar una tarea antes de agregarla.',
+      text: 'You must enter a task before adding it.',
     });
   } else if (this.nuevaPrioridad.trim() === '') {
     Swal.fire({
       icon: 'error',
       title: 'Error',
-      text: 'Debes seleccionar una prioridad antes de agregar la tarea.',
+      text: 'You must select a priority before adding the task.',
     });
   } else {
     const prioridad = this.nuevaPrioridad;
@@ -113,7 +99,7 @@ agregarTarea() {
       prioridad,
       editandoPrioridad: false,
       prioridadTemporal: '',
-      checkVisible: true // Mostrar el icono de marca (v) al agregar la tarea
+      checkVisible: true 
     });
     this.nuevaTarea = '';
     this.nuevaPrioridad = '';
@@ -122,11 +108,6 @@ agregarTarea() {
 }
 
 
-  // la funcion completarTarea(sugerencia) es para que el usuario seleccione una sugerencia para completar la tarea.
-//  completarTarea(sugerencia: string) {
-  //  this.nuevaTarea = sugerencia; // Completa el campo de entrada con la sugerencia
-  //  this.sugerencias = []; // Borra las sugerencias, ya que se ha seleccionado una
-  //}
 
 
   eliminarTarea(index: number) {
@@ -144,7 +125,7 @@ agregarTarea() {
   }
 
   guardarPrioridad(index: number) {
-    // Puedes agregar validaciones aquí si es necesario
+
     this.tareas[index].prioridad = this.tareas[index].prioridadTemporal;
     this.tareas[index].editandoPrioridad = false;
   }
@@ -160,16 +141,16 @@ agregarTarea() {
   
     switch (prioridad) {
       case 'Low':
-        backgroundColor = '#007ACC'; // Establece el color azul para Low
+        backgroundColor = '#007ACC'; 
         break;
       case 'Medium':
-        backgroundColor = '#dabb0f'; // Establece el color amarillo para Medium
+        backgroundColor = '#dabb0f'; 
         break;
       case 'High':
-        backgroundColor = '#FF4500'; // Establece el color rojo para High
+        backgroundColor = '#FF4500'; 
         break;
       default:
-        backgroundColor = 'transparent'; // Color de fondo predeterminado
+        backgroundColor = 'transparent'; 
     }
   
     return { 'background-color': backgroundColor };
