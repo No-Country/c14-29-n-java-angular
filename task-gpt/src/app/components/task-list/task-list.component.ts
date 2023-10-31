@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
 import * as OpenAI from 'openai';
 import { ChatGptService } from 'src/app/services/chat-gpt.service';
 
@@ -65,8 +66,11 @@ export class TaskListComponent {
 
   fechaHoy = Date.now();
 
-  tareas: { nombre: string, completada: boolean }[] = [];
+  tareas: { nombre: string, completada: boolean, prioridad: string, editandoPrioridad: boolean, prioridadTemporal: string }[] = [];
+
   nuevaTarea: string = '';
+  nuevaPrioridad: string = ''; // Nueva propiedad para almacenar la prioridad seleccionada
+  prioridades: string[] = ['Low', 'Medium', 'High'];
 
   sugerencias: string[] = [];
   palabraClave: string = '';
@@ -88,13 +92,26 @@ export class TaskListComponent {
 //}
 
 agregarTarea() {
-  if (this.nuevaTarea.trim() !== '') {
-    this.tareas.push({ nombre: this.nuevaTarea, completada: false }); // Inicializa completada como false
+  if (this.nuevaTarea.trim() === '') {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'You must enter a task before adding it.',
+    });
+  } else if (this.nuevaPrioridad.trim() === '') {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'You must select a priority before adding the task.',
+    });
+  } else {
+    const prioridad = this.nuevaPrioridad;
+    this.tareas.push({ nombre: this.nuevaTarea, completada: false, prioridad, editandoPrioridad: false, prioridadTemporal: '' });
     this.nuevaTarea = '';
+    this.nuevaPrioridad = '';
     this.sugerencias = [];
   }
 }
-
   // la funcion completarTarea(sugerencia) es para que el usuario seleccione una sugerencia para completar la tarea.
 //  completarTarea(sugerencia: string) {
   //  this.nuevaTarea = sugerencia; // Completa el campo de entrada con la sugerencia
@@ -109,6 +126,17 @@ agregarTarea() {
 
   marcarComoCompletada(index: number) {
     this.tareas[index].completada = !this.tareas[index].completada;
+  }
+
+  editarPrioridad(index: number) {
+    this.tareas[index].editandoPrioridad = true;
+    this.tareas[index].prioridadTemporal = this.tareas[index].prioridad;
+  }
+
+  guardarPrioridad(index: number) {
+    // Puedes agregar validaciones aquí si es necesario
+    this.tareas[index].prioridad = this.tareas[index].prioridadTemporal;
+    this.tareas[index].editandoPrioridad = false;
   }
 }
 
