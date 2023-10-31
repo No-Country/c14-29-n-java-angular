@@ -74,6 +74,7 @@ export class TaskListComponent {
 
   sugerencias: string[] = [];
   palabraClave: string = '';
+  filtroPrioridad: string = 'All'; // Valor predeterminado para mostrar todas las tareas
 
  // constructor(private chatGptService: ChatGptService){ }
 
@@ -138,5 +139,13 @@ agregarTarea() {
     this.tareas[index].prioridad = this.tareas[index].prioridadTemporal;
     this.tareas[index].editandoPrioridad = false;
   }
+  get tareasFiltradas() {
+    if (this.filtroPrioridad === 'All') {
+      return this.tareas;
+    } else {
+      return this.tareas.filter((tarea) => tarea.prioridad === this.filtroPrioridad);
+    }
+  }
+
 }
 
