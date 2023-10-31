@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
-import * as OpenAI from 'openai';
-import { ChatGptService } from 'src/app/services/chat-gpt.service';
 
 @Component({
   selector: 'app-task-list',
@@ -148,4 +146,5 @@ agregarTarea() {
   }
 
 }
+
 
