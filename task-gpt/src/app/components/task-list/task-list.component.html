@@ -47,31 +47,34 @@ ul.suggestions {
         </div>
       </div>
       <div class="col-md-8 mt-4 font">
-        <div class="d-flex flex-column justify-content-center align-items-center p-3">
-          <div class="mb-3 w-100 d-flex justify-content-between align-items-center"> <!-- Esto separará el formulario y la lista -->
-            <div class="d-flex flex-column w-100 mr-2" style="min-height: 100px;">
+        <div class="d-flex flex-column justify-content-end align-items-end p-3">
+          <button type="button" class="btn btn-outline-dark  " id="boton" (click)="agregarTarea()">Add
+            <fa-icon [icon]="faPlus"></fa-icon>
+          </button>
+          <div class="mt-0 w-100 d-flex justify-content-start align-items-start"> <!-- Esto separará el formulario y la lista -->
+      
+  
+            <div class="d-flex flex-column w-50  " style="min-height: 100px;">
             <!-- El atributo (keyup.enter) detecta cuando el usuario presiona Enter, mientras que (input) detecta cambios en el contenido del campo de entrada de texto -->
             <!--Esto iria en el input (input)="obtenerSugerencias()" -->
             <input [(ngModel)]="nuevaTarea" (input)="onTareaInput($event)"
             (keyup.enter)="agregarTarea()"
-             placeholder="New To do..." class="w-50 mr-2">
-             <!-- <div *ngIf="sugerencias.length > 0">-->
-          <div class="w-50">
-            <ul class="list-group suggestions" >
-              <li class="list-group-item list-group-item-action" *ngFor="let suggestion of suggestions"
-                (click)="selectSuggestion(suggestion)">{{ suggestion }}
-              </li>
-            </ul>
-          </div>
-   <!--</div>-->
+             placeholder="New To do..." class="w-100">
+             <div class="w-100 d-flex justify-content-center align-items-center">
+              <ul class="list-group suggestions" style="text-align: center;">
+                <li class="list-group-item list-group-item-action" *ngFor="let suggestion of suggestions" (click)="selectSuggestion(suggestion)">{{ suggestion }}</li>
+              </ul>
             </div>
-            <button type="button" class="btn btn-outline-dark" id="boton" (click)="agregarTarea()" style="min-height: 100px;" style="position: absolute;">Add
-              <fa-icon [icon]="faPlus"></fa-icon>
-            </button>
-
-
-
+            
+            </div>
+       
+  
           </div>
+             <!-- <div *ngIf="sugerencias.length > 0">-->
+           
+              
+   <!--</div>-->
+   
 
         </div>
       </div>
