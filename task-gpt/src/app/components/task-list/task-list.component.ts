@@ -66,7 +66,7 @@ export class TaskListComponent {
 
   fechaHoy = Date.now();
 
-  tareas: { nombre: string, completada: boolean, prioridad: string, editandoPrioridad: boolean, prioridadTemporal: string }[] = [];
+  tareas: { nombre: string, completada: boolean, prioridad: string, editandoPrioridad: boolean, prioridadTemporal: string, checkVisible: boolean }[] = [];
 
   nuevaTarea: string = '';
   nuevaPrioridad: string = ''; // Nueva propiedad para almacenar la prioridad seleccionada
@@ -97,22 +97,31 @@ agregarTarea() {
     Swal.fire({
       icon: 'error',
       title: 'Error',
-      text: 'You must enter a task before adding it.',
+      text: 'Debes ingresar una tarea antes de agregarla.',
     });
   } else if (this.nuevaPrioridad.trim() === '') {
     Swal.fire({
       icon: 'error',
       title: 'Error',
-      text: 'You must select a priority before adding the task.',
+      text: 'Debes seleccionar una prioridad antes de agregar la tarea.',
     });
   } else {
     const prioridad = this.nuevaPrioridad;
-    this.tareas.push({ nombre: this.nuevaTarea, completada: false, prioridad, editandoPrioridad: false, prioridadTemporal: '' });
+    this.tareas.push({
+      nombre: this.nuevaTarea,
+      completada: false,
+      prioridad,
+      editandoPrioridad: false,
+      prioridadTemporal: '',
+      checkVisible: true // Mostrar el icono de marca (v) al agregar la tarea
+    });
     this.nuevaTarea = '';
     this.nuevaPrioridad = '';
     this.sugerencias = [];
   }
 }
+
+
   // la funcion completarTarea(sugerencia) es para que el usuario seleccione una sugerencia para completar la tarea.
 //  completarTarea(sugerencia: string) {
   //  this.nuevaTarea = sugerencia; // Completa el campo de entrada con la sugerencia
@@ -146,6 +155,24 @@ agregarTarea() {
       return this.tareas.filter((tarea) => tarea.prioridad === this.filtroPrioridad);
     }
   }
-
+  getCardBackground(prioridad: string): any {
+    let backgroundColor = '';
+  
+    switch (prioridad) {
+      case 'Low':
+        backgroundColor = '#007ACC'; // Establece el color azul para Low
+        break;
+      case 'Medium':
+        backgroundColor = '#dabb0f'; // Establece el color amarillo para Medium
+        break;
+      case 'High':
+        backgroundColor = '#FF4500'; // Establece el color rojo para High
+        break;
+      default:
+        backgroundColor = 'transparent'; // Color de fondo predeterminado
+    }
+  
+    return { 'background-color': backgroundColor };
+  }
 }
 
