@@ -39,6 +39,18 @@ export class TaskListComponent implements OnInit {
     
   ];
 
+  mostrarTodasLasTareas() {
+    this.filtroPrioridad = 'All';
+  }
+
+  // Método para mostrar solo las tareas completadas
+  mostrarTareasCompletadas() {
+    this.filtroPrioridad = 'Completed';
+  }
+
+
+
+
   onTareaInput(event: any) {
     const tareaTerm = event.target.value.toLowerCase().trim();
     if (tareaTerm === '') {
@@ -160,9 +172,10 @@ guardarEdicion(index: number) {
   get tareasFiltradas() {
     if (this.filtroPrioridad === 'All') {
       return this.tareas;
-    } else {
-      return this.tareas.filter((tarea) => tarea.prioridad === this.filtroPrioridad);
+    } else if (this.filtroPrioridad === 'Completed') {
+      return this.tareas.filter((tarea) => tarea.completada);
     }
+    return this.tareas.filter((tarea) => tarea.prioridad === this.filtroPrioridad);
   }
 
   getCardBackground(prioridad: string): any {
