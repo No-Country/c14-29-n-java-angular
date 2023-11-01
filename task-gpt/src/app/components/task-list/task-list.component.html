@@ -14,6 +14,13 @@
 
 }
 
+.buttonEdit {
+  height: 40px;
+  width: 40px;
+}
+
+
+
 .mi-fuente-personalizada {
     font-family: 'roboto', sans-serif;
 }
@@ -46,7 +53,7 @@ ul.suggestions {
         <div class="col-md-9 col-lg-6 col-xl-5">
           <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid" alt="Sample image">
         </div>
-
+        
         <div class="d-flex flex-column px-4 ml-2">
           <span class="font">Filter by Priority:</span>
           <div class="d-flex flex-column">
@@ -60,8 +67,8 @@ ul.suggestions {
             </label>
           </div>
         </div>
-
-
+        
+        
       </div>
       <div class="col-md-8 mt-2 font">
         <div class="d-flex flex-column justify-content-end align-items-end p-3">
@@ -69,8 +76,8 @@ ul.suggestions {
             Add
             <fa-icon [icon]="faPlus"></fa-icon>
           </button>
-
-
+          
+          
           <div class="mt-0 w-100 d-flex justify-content-start align-items-start">
             <div class="d-flex flex-column w-50">
               <input [(ngModel)]="nuevaTarea" (input)="onTareaInput($event)" (keyup.enter)="agregarTarea()" placeholder="New To do..." class="w-100">
@@ -91,22 +98,29 @@ ul.suggestions {
           </div>
         </div>
       </div>
+      
+  
 
 
-
-
-
+      
       <div class="d-flex flex-column  align-items-center justify-content-center m-4" cdkDropList (cdkDropListDropped)="onTareasDrop($event)">
         <div *ngFor="let tarea of tareasFiltradas; let i = index"  [ngStyle]="getCardBackground(tarea.prioridad)" cdkDrag class="mb-3 mt-3 border border-dark d-flex justify-content-between align-items-center w-75 max-height-element" [class.completed]="tarea.completada">
-          <div class="m-4 word-wrap text-white">
-
+          <div class="m-5 word-wrap text-white">
+      
             <input class="form-check-input" type="checkbox" (click)="marcarComoCompletada(i)" [(ngModel)]="tarea.completada">
             <span *ngIf="tarea.checkVisible" class="px-0"></span> <!-- Icono de marca (v) -->
-            <span class="px-2 mr-4">{{ tarea.nombre }}</span>
-
-
+            <span *ngIf="tareaEditando !== i; else editTask">
+              {{ tarea.nombre }}
+            
+            </span>
+            <ng-template #editTask>
+              <input type="text" [(ngModel)]="tarea.nombre" class="form-control" (keyup.enter)="guardarEdicion(i)" (blur)="guardarEdicion(i)">
+              <button type="button" class="btn btn-success btn-sm" (click)="guardarEdicion(i)">Guardar</button>
+              <button type="button" class="btn btn-danger btn-sm" (click)="cancelarEdicion(i)">Cancelar</button>
+            </ng-template>
+      
            <br>
-            <span class="fw-bolder text-light text-underline">Priority:</span>
+            <span class="fw-bolder text-light text-underline">Priority:</span>     
               <span class="fw-medium px-2" *ngIf="!tarea.editandoPrioridad">{{ tarea.prioridad }}</span>
               <span *ngIf="tarea.editandoPrioridad">
                 <select [(ngModel)]="tarea.prioridadTemporal">
@@ -116,16 +130,15 @@ ul.suggestions {
                 </select>
                 <button class="btn btn-success btn-sm" (click)="guardarPrioridad(i)">Save</button>
               </span>
-              <button type="button" class="btn btn-dark m-2 w-0" (click)="editarPrioridad(i)" >
-              Editar <fa-icon [icon]="faPen"></fa-icon>
-              </button>
-
+              <button type="button" class="btn btn-light  buttonEdit" (click)="editarPrioridad(i)" ><fa-icon [icon]="faPen"></fa-icon>
+                </button>
+              
             <br>
-
+            
             <span class="text-light fw-bolder py-2 text-underline">Create: </span><span class="font-monospace fw-medium px-2">{{ fechaHoy | date:"fullDate" }},{{ fechaHoy | date:"shortTime" }} hs</span>
           </div>
           <div class="d-flex flex-column justify-content-end align-items-end  m-4">
-
+            <button type="button" class="btn btn-dark btn-sm mb-2 buttonEdit" (click)="editarTarea(i)"><fa-icon [icon]="faPen"></fa-icon></button>
             <button type="button" class="btn btn-danger m-0 w-0" (click)="eliminarTarea(i)">
               <fa-icon [icon]="faTrash"></fa-icon>
             </button>
@@ -135,5 +148,3 @@ ul.suggestions {
     </div>
   </div>
 </div>
-
-
