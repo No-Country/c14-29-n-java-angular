@@ -74,7 +74,7 @@ export class TaskListComponent {
   sugerencias: string[] = [];
   palabraClave: string = '';
   filtroPrioridad: string = 'All'; 
-
+  mensajeAdvertencia: string = '';
 
 
 agregarTarea() {
@@ -158,5 +158,10 @@ agregarTarea() {
   onTareasDrop(event: CdkDragDrop<string[]>): void {
     moveItemInArray(this.tareasFiltradas, event.previousIndex, event.currentIndex);
   }
+ 
+
+
+
+
 }
 
