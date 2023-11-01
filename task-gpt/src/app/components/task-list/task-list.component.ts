@@ -75,8 +75,8 @@ export class TaskListComponent {
   sugerencias: string[] = [];
   palabraClave: string = '';
   filtroPrioridad: string = 'All';
-
-
+  mensajeAdvertencia: string = '';
+  tareaEditando: number | null = null;
 
 agregarTarea() {
   if (this.nuevaTarea.trim() === '') {
