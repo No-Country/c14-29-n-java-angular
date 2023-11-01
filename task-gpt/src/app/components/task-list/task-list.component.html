@@ -102,8 +102,15 @@ ul.suggestions {
       
             <input class="form-check-input" type="checkbox" (click)="marcarComoCompletada(i)" [(ngModel)]="tarea.completada">
             <span *ngIf="tarea.checkVisible" class="px-0"></span> <!-- Icono de marca (v) -->
-            <span class="px-2 mr-4">{{ tarea.nombre }}</span>
-            
+            <span *ngIf="tareaEditando !== i; else editTask">
+              {{ tarea.nombre }}
+              <button type="button" class="btn btn-dark btn-sm" (click)="editarTarea(i)">Editar</button>
+            </span>
+            <ng-template #editTask>
+              <input type="text" [(ngModel)]="tarea.nombre" class="form-control" (keyup.enter)="guardarEdicion(i)" (blur)="guardarEdicion(i)">
+              <button type="button" class="btn btn-success btn-sm" (click)="guardarEdicion(i)">Guardar</button>
+              <button type="button" class="btn btn-danger btn-sm" (click)="cancelarEdicion(i)">Cancelar</button>
+            </ng-template>
       
            <br>
             <span class="fw-bolder text-light text-underline">Priority:</span>     

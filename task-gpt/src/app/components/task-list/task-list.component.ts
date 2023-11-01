@@ -75,7 +75,7 @@ export class TaskListComponent {
   palabraClave: string = '';
   filtroPrioridad: string = 'All'; 
   mensajeAdvertencia: string = '';
-
+  tareaEditando: number | null = null;  
 
 agregarTarea() {
   if (this.nuevaTarea.trim() === '') {
@@ -106,6 +106,21 @@ agregarTarea() {
   }
 }
 
+// Método para activar el modo de edición
+editarTarea(index: number) {
+  this.tareaEditando = index;
+}
+
+// Método para desactivar el modo de edición
+cancelarEdicion(index: number) {
+  this.tareas[index].prioridadTemporal = this.tareas[index].prioridad;
+  this.tareas[index].editandoPrioridad = false;
+}
+
+// Método para guardar la tarea editada
+guardarEdicion(index: number) {
+  this.tareaEditando = null;
+}
 
 
 
@@ -159,8 +174,6 @@ agregarTarea() {
     moveItemInArray(this.tareasFiltradas, event.previousIndex, event.currentIndex);
   }
  
-
-
 
 
 }
