@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
-
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-task-list',
@@ -57,8 +57,8 @@ export class TaskListComponent {
                                 );
                                   }
      selectSuggestion(suggestion: string) {
-           this.nuevaTarea = suggestion;
-               this.suggestions = [];
+           this.nuevaTarea = suggestion; 
+               this.suggestions = []; 
                  }
   faPlus: any = faPlus;
   faTrash: any = faTrash;
@@ -68,12 +68,12 @@ export class TaskListComponent {
   tareas: { nombre: string, completada: boolean, prioridad: string, editandoPrioridad: boolean, prioridadTemporal: string, checkVisible: boolean }[] = [];
 
   nuevaTarea: string = '';
-  nuevaPrioridad: string = '';
+  nuevaPrioridad: string = ''; 
   prioridades: string[] = ['Low', 'Medium', 'High'];
 
   sugerencias: string[] = [];
   palabraClave: string = '';
-  filtroPrioridad: string = 'All';
+  filtroPrioridad: string = 'All'; 
 
 
 
@@ -98,7 +98,7 @@ agregarTarea() {
       prioridad,
       editandoPrioridad: false,
       prioridadTemporal: '',
-      checkVisible: true
+      checkVisible: true 
     });
     this.nuevaTarea = '';
     this.nuevaPrioridad = '';
@@ -135,6 +135,28 @@ agregarTarea() {
       return this.tareas.filter((tarea) => tarea.prioridad === this.filtroPrioridad);
     }
   }
+  getCardBackground(prioridad: string): any {
+    let backgroundColor = '';
+  
+    switch (prioridad) {
+      case 'Low':
+        backgroundColor = '#007ACC'; 
+        break;
+      case 'Medium':
+        backgroundColor = '#dabb0f'; 
+        break;
+      case 'High':
+        backgroundColor = '#FF4500'; 
+        break;
+      default:
+        backgroundColor = 'transparent'; 
+    }
+  
+    return { 'background-color': backgroundColor };
+  }
 
+  onTareasDrop(event: CdkDragDrop<string[]>): void {
+    moveItemInArray(this.tareasFiltradas, event.previousIndex, event.currentIndex);
+  }
 }
 
