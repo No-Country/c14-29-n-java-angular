@@ -85,11 +85,7 @@
     font-size: 1rem;
   }
 }
-@media (min-width: 1200px) {
-  [class*=container] {
-    max-width: 1000px;
-  }
-}
+
 .mouse {
   bottom: 2rem;
   left: 50%;
