@@ -25,6 +25,7 @@ import { SigninComponent } from './routes/signin/signin.component';
 import { SignupComponent } from './routes/signup/signup.component';
 import { ButtonDropdownComponent } from './components/button-dropdown/button-dropdown.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     LogoutComponent,
     SigninComponent,
     SignupComponent,
-    ButtonDropdownComponent
+    ButtonDropdownComponent,
+    FooterComponent
   ],
   imports: [DragDropModule,
     BrowserModule,
