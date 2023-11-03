@@ -8,6 +8,7 @@ import { registerLocaleData } from "@angular/common";
 registerLocaleData(localeEs, "es");
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -53,6 +54,7 @@ import { FooterComponent } from './components/footer/footer.component';
     BrowserAnimationsModule,
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
+    TypeaheadModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth())
   ],

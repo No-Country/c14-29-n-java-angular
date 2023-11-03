@@ -9,7 +9,7 @@
 .offcanvas.show .nav-link {
   color: black;
 }
-
+/*
 .cover-image {
   min-height: 600px;
   color: gray;
@@ -30,7 +30,7 @@
   z-index: 0;
   background: black;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 30%);
-}
+} */
 
 @media (max-width: 767px) {
   p.lead {

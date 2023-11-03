@@ -1,0 +1,22 @@
+<h1>Lista de Tareas Generada por GPT-3</h1>
+
+<form (ngSubmit)="submitMessage()">
+  <input type="text" [(ngModel)]="userMessage" name="userMessage" placeholder="Escribe tu mensaje" />
+  <button type="submit">Enviar</button>
+</form>
+
+<div class="chat-box">
+  <div *ngIf="chatResponse" class="message response">{{ chatResponse }}</div>
+</div>
+
+<input
+  type="text"
+  [(ngModel)]="selectedFruit"
+  [typeahead]="suggestions"
+  (typeaheadOnSelect)="onSelect($event)"
+  class="form-control"
+  placeholder="Buscar frutas..."
+>
+
+
+
