@@ -30,6 +30,26 @@ Nuestra plataforma está diseñada pensando en personas como tú, que valoran su
 
 <br>
 
+## Caracteristicas
+
+<div align="left">
+  <p>Hemos desarrollado un sitio web de lista de tareas diseñado para ayudarte a mantener un control completo de tus tareas y proyectos de manera eficiente. Algunas de las características clave incluyen:</p>
+
+   <b> 💠 Organización Intuitiva: </b> 
+   <br> 
+   <p>Crea y gestiona tus listas de tareas de manera rápida y sencilla. Arrastra y suelta las tareas. Puedes mover tus tareas como si fueran tarjetas ¡Así de fácil!</p>
+   <b> 💠 Priorización: </b> 
+   <br> 
+   <p>No todas las tareas son iguales. Nuestra herramienta te permite categorizar tus tareas por nivel de prioridad: alta, media, o baja, lo que te ayuda a enfocarte en lo que realmente importa. </p>
+   <b> 💠 Seguridad y Privacidad: </b> 
+   <br>
+   <p>Tus datos son importantes. Garantizamos la seguridad de tu información personal y de tus tareas.</p>
+   <b> 💠 Seguimiento: </b> 
+   <br> 
+   <p>Obtén una visión clara de tus tareas a lo largo del tiempo. Analiza tus hábitos y mejora tu gestión del tiempo.</p>
+<br>
+</div>
+
 ## Video 📹
 <div align="center">
   <p>
