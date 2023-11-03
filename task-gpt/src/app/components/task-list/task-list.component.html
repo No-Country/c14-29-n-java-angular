@@ -73,14 +73,18 @@ ul.suggestions {
           <button type="button" class="btn btn-primary m-4" (click)="mostrarTodasLasTareas()">Todas las Tareas</button>
         
       </div>
+     
+     
+     
+
+
+      
       <div class="col-md-8 mt-2 font">
         <div class="d-flex flex-column justify-content-end align-items-end p-3">
           <button type="button" class="btn btn-outline-dark" (click)="agregarTarea()">
             Add
             <fa-icon [icon]="faPlus"></fa-icon>
           </button>
-          
-          
           <div class="mt-0 w-100 d-flex justify-content-start align-items-start">
             <div class="d-flex flex-column w-50">
               <input [(ngModel)]="nuevaTarea" (input)="onTareaInput($event)" (keyup.enter)="agregarTarea()" placeholder="New To do..." class="w-100">
@@ -102,7 +106,8 @@ ul.suggestions {
         </div>
       </div>
       
-  
+    
+
 
 
       
@@ -148,6 +153,17 @@ ul.suggestions {
           </div>
         </div>
       </div>
+      
+
+      <div class="col-md-8 mt-2 mx-auto font">
+       
+          <div id="calendar" class="mx-auto mt-3">
+            <!-- Agrega otras clases según sea necesario -->
+          </div>
+        </div>
+
+      
+
     </div>
   </div>
 </div>

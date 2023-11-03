@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit,Component, OnInit } from '@angular/core';
 import { faPlus, faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
+import { Calendar } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
 
 @Component({
   selector: 'app-task-list',
@@ -39,6 +42,7 @@ export class TaskListComponent implements OnInit {
     
   ];
 
+
   mostrarTodasLasTareas() {
     this.filtroPrioridad = 'All';
   }
@@ -47,9 +51,6 @@ export class TaskListComponent implements OnInit {
   mostrarTareasCompletadas() {
     this.filtroPrioridad = 'Completed';
   }
-
-
-
 
   onTareaInput(event: any) {
     const tareaTerm = event.target.value.toLowerCase().trim();
@@ -83,6 +84,8 @@ export class TaskListComponent implements OnInit {
     prioridad: string,
     editandoPrioridad: boolean,
     prioridadTemporal: string,
+    fechaCreacionLegible: string;
+    fechaCreacion: string; // Agrega la propiedad fechaCreacion
     checkVisible: boolean,
   }[] = [];
 
@@ -105,19 +108,13 @@ export class TaskListComponent implements OnInit {
 
   agregarTarea() {
     if (this.nuevaTarea.trim() === '') {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'You must enter a task before adding it.',
-      });
+      // ... código existente ...
     } else if (this.nuevaPrioridad.trim() === '') {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'You must select a priority before adding the task.',
-      });
+      // ... código existente ...
     } else {
       const prioridad = this.nuevaPrioridad;
+      const fechaCreacionISO = new Date().toISOString(); // Formato ISO
+      const fechaCreacionLegible = new Date().toLocaleString(); // Formato legible por humanos
       this.tareas.push({
         nombre: this.nuevaTarea,
         completada: false,
@@ -125,6 +122,8 @@ export class TaskListComponent implements OnInit {
         editandoPrioridad: false,
         prioridadTemporal: '',
         checkVisible: true,
+        fechaCreacion: fechaCreacionISO,
+        fechaCreacionLegible: fechaCreacionLegible, // Almacena la fecha en formato legible
       });
       this.nuevaTarea = '';
       this.nuevaPrioridad = '';
@@ -132,21 +131,18 @@ export class TaskListComponent implements OnInit {
       this.actualizarTareasEnLocalStorage();
     }
   }
-// Método para activar el modo de edición
-editarTarea(index: number) {
-  this.tareaEditando = index;
-}
+  editarTarea(index: number) {
+    this.tareaEditando = index;
+  }
 
-// Método para desactivar el modo de edición
-cancelarEdicion(index: number) {
-  this.tareas[index].prioridadTemporal = this.tareas[index].prioridad;
-  this.tareas[index].editandoPrioridad = false;
-}
+  cancelarEdicion(index: number) {
+    this.tareas[index].prioridadTemporal = this.tareas[index].prioridad;
+    this.tareas[index].editandoPrioridad = false;
+  }
 
-// Método para guardar la tarea editada
-guardarEdicion(index: number) {
-  this.tareaEditando = null;
-}
+  guardarEdicion(index: number) {
+    this.tareaEditando = null;
+  }
 
   eliminarTarea(index: number) {
     this.tareas.splice(index, 1);
@@ -195,7 +191,7 @@ guardarEdicion(index: number) {
     }
     return { 'background-color': backgroundColor };
   }
-
+  
   onTareasDrop(event: CdkDragDrop<string[]>): void {
     moveItemInArray(this.tareasFiltradas, event.previousIndex, event.currentIndex);
     this.actualizarTareasEnLocalStorage();
@@ -203,6 +199,28 @@ guardarEdicion(index: number) {
 
   private actualizarTareasEnLocalStorage() {
     localStorage.setItem('tareas', JSON.stringify(this.tareas));
+  }
+
+  ngAfterViewInit() {
+    const calendarEl = document.getElementById('calendar');
+  
+    if (calendarEl) { // Verifica que calendarEl no sea null
+      const calendar = new Calendar(calendarEl, {
+        plugins: [dayGridPlugin],
+        events: this.getTasksForCalendar(),
+      });
+      calendar.render();
+    } else {
+      console.error('Element with ID "calendar" not found.');
+    }
+  }
+  getTasksForCalendar() {
+    // Convierte las tareas en eventos de calendario
+    const events = this.tareas.map(tarea => ({
+      title: tarea.nombre,
+      start: tarea.fechaCreacion, // Utiliza la propiedad fechaCreación en formato ISO
+    }));
+    return events;
   }
 }
 
