@@ -6,18 +6,12 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
-import * as openai from 'openai';
-import { ChatgptService } from 'src/app/services/chatgpt.service';
-
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
-
-
-
   suggestions: string[] = [];
   selectedSuggestions: string = '';
 
@@ -45,7 +39,7 @@ export class TaskListComponent implements OnInit {
   'Responder a los correos electrónicos importantes', 'Recoger a los niños de clase', 'Redactar un informe', 'Realizar un seguimiento de las tareas de los proyectos en el trabajo', 'Revisar y actualizar mi currículum vitae',
   'Revisar y archivar documentos importantes',
   'Subir mis fotos a mis redes sociales'
-
+    
   ];
 
 
@@ -104,22 +98,6 @@ export class TaskListComponent implements OnInit {
   filtroPrioridad: string = 'All';
   mensajeAdvertencia: string = '';
   tareaEditando: number | null = null;
-
-//Mostrar la respuesta de Chat GPT
-userMessage: string = '';
-chatResponse: string = ''; // Para mostrar la respuesta del chat
-
-  constructor(private chatService: ChatgptService){}
-
-  submitMessage() {
-    if (this.userMessage.trim() !== '') {
-      this.chatService.sendMessage(this.userMessage)
-        .then(response => {
-          this.chatResponse = response;
-        });
-      this.userMessage = ''; // Limpiar el campo de entrada después de enviar el mensaje
-    }
-  }
 
   ngOnInit() {
     const storedTareas = localStorage.getItem('tareas');
@@ -213,7 +191,7 @@ chatResponse: string = ''; // Para mostrar la respuesta del chat
     }
     return { 'background-color': backgroundColor };
   }
-
+  
   onTareasDrop(event: CdkDragDrop<string[]>): void {
     moveItemInArray(this.tareasFiltradas, event.previousIndex, event.currentIndex);
     this.actualizarTareasEnLocalStorage();
@@ -225,7 +203,7 @@ chatResponse: string = ''; // Para mostrar la respuesta del chat
 
   ngAfterViewInit() {
     const calendarEl = document.getElementById('calendar');
-
+  
     if (calendarEl) { // Verifica que calendarEl no sea null
       const calendar = new Calendar(calendarEl, {
         plugins: [dayGridPlugin],
@@ -245,19 +223,3 @@ chatResponse: string = ''; // Para mostrar la respuesta del chat
     return events;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
