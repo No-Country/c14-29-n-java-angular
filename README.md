@@ -53,10 +53,9 @@ Nuestra plataforma está diseñada pensando en personas como tú, que valoran su
 ## Video 📹
 <div align="center">
   <p>
-    Mira nuestro video promocional <a href="http://youtube.com">aquí</a>
+    Mira nuestro video promocional <a href="https://www.youtube.com/watch?v=9354ZMLeDpk">aquí</a>
   </p>
 </div>
- 
 
 
 ## Build with 🛠️
@@ -66,6 +65,7 @@ Nuestra plataforma está diseñada pensando en personas como tú, que valoran su
 ![Bootstrap](https://img.shields.io/static/v1?style=for-the-badge&message=Bootstrap&color=7A33FF&logo=Bootstrap&logoColor=white&label=)
 ![Firebase](https://img.shields.io/static/v1?style=for-the-badge&message=Firebase&color=orange&logo=Firebase&logoColor=FFFFFF&label=)
 ![Jira](https://img.shields.io/static/v1?style=for-the-badge&message=Jira&color=blue&logo=Jira&logoColor=FFFFFF&label=)
+![Postman](https://img.shields.io/static/v1?style=for-the-badge&message=Postman&color=orange&logo=Postman&logoColor=FFFFFF&label=)
 ![Miro](https://img.shields.io/static/v1?style=for-the-badge&message=Miro&color=yellow&logo=Miro&logoColor=FFFFFF&label=)
 ![Canva](https://img.shields.io/static/v1?style=for-the-badge&message=Canva&color=0099BB&logo=Canva&logoColor=FFFFFF&label=)
 ![Chat GPT](https://img.shields.io/static/v1?style=for-the-badge&message=OPENAI&color=00C0A3&logo=Openai&logoColor=FFFFFF&label=)
